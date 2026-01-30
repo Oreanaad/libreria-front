@@ -7,7 +7,7 @@ import { useWishlist } from '../../context/WishListBook';
 import { useCart } from '../../context/CartContext';
 import axios from 'axios'; 
 import toast from 'react-hot-toast';
-import EscribirReseña from '../../reviews/writeReview';
+import EscribirReseña from '../../reviews/WriteReview';
 import ListaReseñas from '../../reviews/ReviewList';
 import { useAuth } from '../../context/UseAuth';
 
