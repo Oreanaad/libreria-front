@@ -6,7 +6,7 @@ const SectionHeader = ({ icon, title }) => {
     <div className="section-header-container">
       <div className="section-icon">{icon}</div>
       <h2 className="section-title">{title}</h2>
-      <div className="section-line"></div>
+      <div className="section-line-tienda"></div>
     </div>
   );
 };

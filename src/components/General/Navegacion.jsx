@@ -1,7 +1,10 @@
  
  import './Navegacion.css';
 import { Link } from 'react-router-dom';
+
  const Navegacion = () => {
+
+
     return (
  <nav className="secondary-nav">
                 <div className='nav_margin'>

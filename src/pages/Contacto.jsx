@@ -1,7 +1,6 @@
 import React from 'react';
 import Navegacion from '../components/General/Navegacion';
-
-
+import ContactForm from '../components/Contacto/ContactForm';
 
    
 function Contacto() {
@@ -12,7 +11,7 @@ function Contacto() {
     <div className="App">
     
             <Navegacion/>
-    
+            <ContactForm/>
 
           
         </div>

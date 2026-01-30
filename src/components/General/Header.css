@@ -28,14 +28,27 @@ body, html, #root {
     z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
+.header-logo-link {
+    text-decoration: none; /* Elimina el subrayado por defecto */
+    color: inherit;        /* Asegura que el color de texto se herede (si aplica) */
+    display: flex;         /* Para asegurar que ocupe el espacio deseado si el Link es un elemento flex */
+    align-items: center;   /* Centra el logo si el Link tiene más altura */
+    justify-content: center; /* Centra el logo si el Link tiene más ancho */
+}
+
+.header-logo-link:hover {
+    opacity: 0.9; /* Pequeño efecto al pasar el ratón */
+}
+
 .header-logo {
     flex-shrink: 0; /* Evita que el logo se encoja */
     margin-right: 20px;
     margin-left: 180px; /* Margen para pantallas grandes */
+    cursor: pointer; /* Indica que es clickeable */
 }
 
 .header-logo img {
-    height: 100px; /* Tamaño del logo para pantallas grandes */
+    height: 110px; /* Tamaño del logo para pantallas grandes */
     display: block;
 }
 
@@ -56,7 +69,7 @@ body, html, #root {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 600px; /* Ancho máximo para el buscador */
     width: 100%;
-    margin:  auto; /* Centra el buscador y añade margen vertical */
+    margin: auto; /* Centra el buscador y añade margen vertical */
 }
 
 .search-input-fancy {
@@ -96,192 +109,84 @@ body, html, #root {
     color: #333;
 }
 
-/* --- Estilos para botones de acción (Wishlist, Usuario, Carrito) --- */
+/* --- Estilos para los botones de acción (Wishlist, Usuario, Carrito) --- */
 .header-actions {
     display: flex;
-    gap: 15px;
+    gap: 20px; /* Espacio uniforme entre TODOS los botones de acción */
     flex-shrink: 0;
-    margin-right: 30px;
+    margin-right: 30px; /* Margen derecho de la barra completa */
+    align-items: center; /* Alinea los botones verticalmente en el centro del header */
+    justify-content: flex-end; /* Alinea los botones a la derecha si hay espacio extra */
 }
 
+/* --- ESTILOS BASE PARA TODOS LOS BOTONES DE ACCIÓN (Usuario, Carrito, y el corazón en su estado base) --- */
 .action-button {
-    padding: 8px 12px;
-background-color: transparent;
+    background-color:var(--primario) ; /* Fondo sutil para el círculo */
     border: none;
-    border-radius: 4px;
+    border-radius: 50%; /* ¡CLAVE! Para hacer el botón circular */
     cursor: pointer;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    font-weight: bold;
+    
+    /* Tamaños fijos para el botón circular (TODOS los botones serán de este tamaño) */
+    width: 45px; /* Ancho del círculo */
+    height: 45px; /* Alto del círculo (igual al ancho para que sea perfecto) */
+    
+    /* Centrar contenido (el icono) dentro del botón circular */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px; /* Espacio entre el icono y el texto */
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-.action-button-heart {
-    padding: 8px 12px;
-background-color: transparent;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px; /* Espacio entre el icono y el texto */
-    transition: background-color 0.2s ease, color 0.2s ease;
+     box-shadow: 0 4px 10px rgba(79, 6, 60, 0.15);
+    
+    /* Efectos de transición */
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+ 
+    padding: 0; 
+    margin: 0;
 }
 
 .action-button:hover {
-    background-color: var(--secundario); /* Gris muy claro al pasar el ratón */
-    /* Texto más oscuro al pasar el ratón */
-}
-.heart-icon {
-    font-size: 1.6em; /* Tamaño del icono del corazón */
-    color: #fff; /* Color inicial oscuro */
-    position: relative;
-    display: inline-block;
+    background-color: var(--secundario) /* Color de fondo al hacer hover */
+;
+    transform: translateY(-2px); /* Pequeño efecto de levantamiento */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada al hacer hover */
 }
 
 
-
-/* Estilos para los iconos de persona y cesta */
-.user-icon, .cart-icon {
-    font-size: 1.2em;
-    color: #333; /* Iconos oscuros */
-}
-
-/* --- Estilos para la navegación inferior (si se usa) --- */
-
-
-/* --- Media Queries para Responsividad --- */
-
-/* Para pantallas medianas (tabletas y algunos laptops, hasta 1024px) */
-@media (max-width: 1024px) {
-    .main-header {
-        padding: 10px 20px; /* Reducir padding horizontal del header */
-    }
-
-    .header-logo {
-        margin-left: 50px; /* Ajustar margen izquierdo del logo */
-    }
-
-    .header-logo img {
-        height: 80px; /* Reducir tamaño del logo */
-    }
-
-    .search-container {
-        max-width: 500px; /* Reducir ancho máximo del buscador */
-    }
-
-    .header-actions {
-        margin-left: 10px; /* Reducir margen izquierdo de los botones de acción */
-    }
-
-    .action-button {
-        padding: 6px 10px; /* Reducir padding de los botones de acción */
-        font-size: 0.85em; /* Reducir tamaño de fuente de los botones */
-    }
-
-    .heart-icon {
-        font-size: 1.4em; /* Ajustar tamaño del icono del corazón */
-    }
-
-    .user-icon, .cart-icon {
-        font-size: 1.1em; /* Ajustar tamaño de iconos de persona y cesta */
-    }
-}
-
-/* Para pantallas pequeñas (teléfonos móviles, hasta 768px) */
-@media (max-width: 768px) {
-    .main-header {
-        flex-direction: column; /* Apilar elementos verticalmente */
-        align-items: center; /* Centrar elementos apilados */
-        padding: 15px 10px; /* Más padding vertical, menos horizontal */
-    }
-
-    .header-logo {
-        margin-left: 0; /* Eliminar margen izquierdo fijo */
-        margin-bottom: 10px; /* Espacio debajo del logo */
-    }
-
-    .header-logo img {
-        height: 70px; /* Reducir aún más el tamaño del logo */
-    }
-
-    .header-search {
-        order: 3; /* Mover el buscador a la parte inferior en móviles */
-        width: 100%; /* Ocupar todo el ancho disponible */
-        margin: 10px 0; /* Ajustar márgenes */
-    }
-
-    .search-container {
-        margin: 0 auto; /* Centrar buscador */
-        max-width: 90%; /* Ancho más adaptado al móvil */
-    }
-
-    .header-actions {
-        order: 2; /* Mover los botones de acción al centro */
-        width: 100%; /* Ocupar todo el ancho disponible */
-        justify-content: center; /* Centrar los botones horizontalmente */
-        margin-left: 0; /* Eliminar margen fijo */
-        margin-top: 10px; /* Espacio arriba de los botones */
-        flex-wrap: wrap; /* Permitir que los botones se envuelvan si no caben */
-    }
-
-    .action-button {
-        flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
-        max-width: 120px; /* Limitar ancho para que no sean demasiado grandes */
-        font-size: 0.8em; /* Reducir tamaño de fuente */
-        padding: 5px 8px; /* Ajustar padding */
-    }
-    
-    /* Opcional: Ocultar texto en botones muy pequeños y mostrar solo íconos */
-    
-    /* .action-button .heart-icon { */
-         /* margin-right: 0; */ /* Si se oculta el texto, no hay margen a la derecha */
-    /* } */
-}
-
-/* Para pantallas muy pequeñas (móviles antiguos o muy estrechos, hasta 480px) */
-@media (max-width: 480px) {
-    .header-logo img {
-        height: 60px; /* Reducir aún más el logo */
-    }
-
-    .action-button {
-        font-size: 0.7em; /* Reducir aún más la fuente */
-        padding: 4px 6px;
-    }
-    
-    /* Mostrar solo iconos si el espacio es muy limitado */
-    .action-button span:not(.heart-icon) {
-        display: none; /* Ocultar texto */
-    }
-    .action-button .heart-icon, .user-icon, .cart-icon {
-        margin-right: 0; /* Eliminar margen si no hay texto */
-        font-size: 1.5em; /* Hacer iconos un poco más grandes si son lo único */
-    }
+/* --- ESTILOS PARA LAS IMAGENES DENTRO DE LOS BOTONES DE ACCIÓN --- */
+/* Esto aplica a los iconos de lupa, usuario, carrito, etc. que son solo una imagen */
+.action-button img:not(.wishlist-icon-default):not(.wishlist-icon-filled) {
+  
+    width: 32px;
+    height: 32px;
+    object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+    display: block; /* Para control de tamaño más consistente */
 }
 
 
+/* --- ESTILOS ESPECÍFICOS PARA EL BOTÓN DE WISHLIST (Corazón) --- */
 .wishlist-button {
     position: relative; /* CRÍTICO: Para que las imágenes absolutas se posicionen respecto a este botón */
-    width: 32px; /* Ajusta el tamaño del botón para que las imágenes quepan */
-    /* Ajusta el tamaño del botón */
-    padding: 0; /* Asegúrate de que el padding del botón no empuje las imágenes */
+    /* Aseguramos que el wishlist-button sea también circular y del mismo tamaño */
+    width: 45px; 
+    height: 45px;
+    border-radius: 50%;
+    /* La sombra y el hover ya vienen de .action-button */
+    /* Elimina cualquier padding o margen que pueda interferir con el centrado del icono */
+    padding: 0; 
+    margin: 0;
 }
 
+/* Estilos para las DOS imágenes de corazón (vacío y lleno) dentro del botón de wishlist */
 .wishlist-button img {
-    position: absolute; /* CRÍTICO: Superpone las dos imágenes */
-    top: 0;
-    left: 0;
-    width: 100%; /* La imagen ocupa todo el ancho del botón */
-    height: 100%; /* La imagen ocupa todo el alto del botón */
-    object-fit: contain; /* Asegura que la imagen se ajuste sin cortarse */
+    position: absolute; /* Superpone las dos imágenes */
+    top: 50%; /* Centra la imagen verticalmente */
+    left: 50%; /* Centra la imagen horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste fino para el centrado absoluto */
+    
+    /* Tamaño de la imagen del icono de corazón dentro del botón */
+    width: 32px; /* Ajusta este tamaño para el corazón (más grande que los otros si lo deseas) */
+    height: 32px;
+    
+    object-fit: contain;
     transition: opacity 0.3s ease-in-out; /* Transición suave para el efecto de fade */
 }
 
@@ -302,22 +207,170 @@ background-color: transparent;
 .wishlist-button:hover .wishlist-icon-filled {
     opacity: 1; /* Muestra el corazón lleno */
 }
-/* En tu archivo Header.css */
 
-.header-logo-link {
-    text-decoration: none; /* Elimina el subrayado por defecto */
-    color: inherit;        /* Asegura que el color de texto se herede (si aplica) */
-    display: flex;         /* Para asegurar que ocupe el espacio deseado si el Link es un elemento flex */
-    align-items: center;   /* Centra el logo si el Link tiene más altura */
-    justify-content: center; /* Centra el logo si el Link tiene más ancho */
+
+/* --- Media Queries para Responsividad (AJUSTADAS) --- */
+
+/* Para pantallas medianas (hasta 1024px) */
+@media (max-width: 1024px) {
+    .main-header {
+        padding: 10px 20px;
+    }
+    .header-logo {
+        margin-left: 50px;
+    }
+    .header-logo img {
+        height: 80px;
+    }
+    .search-container {
+        max-width: 500px;
+    }
+    .header-actions {
+        margin-left: 10px; 
+        gap: 15px; /* Reducir la separación entre botones */
+    }
+    .action-button {
+        width: 40px; /* Reducir tamaño de los círculos */
+        height: 40px;
+    }
+    .action-button img:not(.wishlist-icon-default):not(.wishlist-icon-filled) { /* Reducir tamaño de los iconos dentro */
+        width: 22px; 
+        height: 22px;
+    }
+    .wishlist-button { /* Asegurar que el botón del corazón se ajuste también */
+        width: 40px;
+        height: 40px;
+    }
+    .wishlist-button img {
+        width: 26px; /* Ajustar el tamaño del icono de corazón para este breakpoint */
+        height: 26px;
+    }
 }
 
-.header-logo-link:hover {
-    opacity: 0.9; /* Pequeño efecto al pasar el ratón */
+/* Para pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 10px;
+    }
+    .header-logo {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    .header-logo img {
+        height: 70px;
+    }
+    .search-container {
+        margin: 0 auto;
+        max-width: 90%;
+    }
+    .header-actions {
+        order: 2; 
+        width: 100%;
+        justify-content: center; /* Centrar los botones horizontalmente */
+        margin-left: 0;
+        margin-top: 10px;
+        flex-wrap: wrap; /* Permitir que los botones se envuelvan si no caben */
+        gap: 10px; /* Reducir aún más la separación */
+    }
+    .action-button, .wishlist-button { /* Tamaño de botón en móvil */
+        width: 38px; 
+        height: 38px;
+    }
+    .action-button img:not(.wishlist-icon-default):not(.wishlist-icon-filled), .wishlist-button img {
+        width: 30px; /* Tamaño de icono en móvil */
+        height: 30px;
+    }
 }
 
-/* También puedes asegurarte de que el div.header-logo tenga el cursor correcto */
-.header-logo {
-    cursor: pointer; /* Indica que es clickeable */
-    /* ... tus estilos existentes para header-logo ... */
+/* Para pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+    .header-logo img {
+        height: 60px;
+    }
+    .action-button, .wishlist-button {
+        width: 35px; /* Tamaño de botón en móvil muy pequeño */
+        height: 35px;
+       
+    }
+    .action-button img:not(.wishlist-icon-default):not(.wishlist-icon-filled), .wishlist-button img {
+        width: 18px; /* Tamaño de icono en móvil muy pequeño */
+        height: 18px;
+    }
+}
+.user-menu-container {
+    position: relative; /* ¡Esencial! */
+    display: inline-block; /* O 'block', 'flex', etc., pero 'inline-block' es común para que ocupe solo el espacio necesario pero acepte ancho/alto */
+    /* Añade padding o un min-width/min-height si el área de hover del contenedor es demasiado pequeña */
+    /* Por ejemplo, si el botón es de 40px y el menú es de 180px, el contenedor debe abarcar eso */
+    /* background-color: rgba(255, 0, 0, 0.1); /* Temporal: para visualizar el área de hover */ 
+}
+
+/* El menú en sí */
+.user-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px); /* Distancia del borde inferior del contenedor */
+    /* ... el resto de tus estilos para el menú ... */
+}
+
+/* 2. El menú desplegable: El "cuadrito" que aparecerá */
+.user-dropdown-menu {
+    position: absolute; /* ¡FUNDAMENTAL! Se posiciona respecto a .user-menu-container */
+    top: calc(100% + 10px); /* Posiciona el menú 10px debajo del borde inferior del .user-menu-container */
+    right: 0; /* Alinea el menú al borde derecho del .user-menu-container */
+    /* Si prefieres que el menú esté centrado debajo del botón, usa:
+       left: 50%;
+       transform: translateX(-50%);
+    */
+    background-color: #fff; /* Fondo blanco para el "cuadrito" */
+    border: 1px solid #ddd; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidad */
+    min-width: 180px; /* Ancho mínimo para el "cuadrito" */
+    padding: 8px 0; /* Padding interno superior/inferior */
+    z-index: 1001; /* Asegura que el menú esté por encima de otros elementos */
+
+    display: flex;
+    flex-direction: column; /* Para que los items se apilen verticalmente */
+
+    /* Animación de aparición */
+    opacity: 0; /* Inicialmente invisible */
+    visibility: hidden; /* Oculto para que no sea interactuable cuando no está visible */
+    transform: translateY(-10px); /* Un pequeño desplazamiento inicial hacia arriba para una animación suave */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+}
+
+/* 3. Regla para mostrar el menú cuando se pasa el ratón por el contenedor */
+.user-menu-container:hover .user-dropdown-menu {
+    opacity: 1; /* Hace el menú completamente visible */
+    visibility: visible; /* Lo hace interactuable */
+    transform: translateY(0); /* Lo baja a su posición final (aparece desde arriba) */
+}
+
+/* Estilo para cada ítem dentro del menú desplegable (los botones "Mi Perfil", "Cerrar Sesión", "Iniciar Sesión") */
+.dropdown-item {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Padding para el texto */
+    text-align: left; /* Alinea el texto a la izquierda */
+    width: 100%; /* Ocupa todo el ancho del "cuadrito" */
+    cursor: pointer; /* Cursor de puntero */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    color: #333; /* Color de texto */
+    transition: background-color 0.2s ease; /* Transición suave al pasar el ratón */
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    display: flex; /* Para alinear contenido si hay más elementos */
+    align-items: center;
+    gap: 8px; /* Espacio si añades un icono al lado del texto */
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0; /* Fondo gris claro al pasar el ratón */
+}
+
+/* Estilo para el nombre de usuario dentro del ítem "Mi Perfil" */
+.dropdown-item strong {
+    font-weight: 600; /* Un poco más de negrita para el nombre de usuario */
+    color: #4a4a4a;
 }

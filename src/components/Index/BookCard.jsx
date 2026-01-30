@@ -1,49 +1,74 @@
+// src/components/BookCard.jsx
 import React from 'react';
 import './BookCard.css'; // Estilos específicos para la tarjeta de libro
+import { renderStars } from '../../hooks/RenderStars'; // Importa la función para renderizar estrellas
+import { Link } from 'react-router-dom'; // <--- ¡Asegúrate de que Link esté importado!
+import BookDetailPage from '../DetalleLibro/BooksDetails';
+import { useCart } from '../../context/CartContext';
+import toast from 'react-hot-toast'; // Importa toast para notificaciones
 
 const BookCard = ({ book }) => {
+  const { addToCart } = useCart();
+
   const handleAddToCart = () => {
-    alert(`"${book.title}" añadido al carrito!`);
-    // Aquí iría la lógica real para añadir al carrito (e.g., Redux, Context API, etc.)
-  };
+    
+    addToCart(book);
 
-  const renderStars = (rating) => {
-    if (rating === null || rating === undefined) {
-      return null;
-    }
-
-    const roundedRating = Math.round(rating * 2) / 2; // Redondear a la media estrella más cercana (0, 0.5, 1, 1.5, etc.)
-    const stars = [];
-
-    // Creamos 5 spans para las estrellas. El CSS determinará si están llenas, medio llenas o vacías.
-    for (let i = 1; i <= 5; i++) {
-      let starClass = 'empty-star';
-      if (i <= roundedRating) {
-        starClass = 'full-star';
-      } else if (i - 0.5 === roundedRating) {
-        starClass = 'half-star';
-      }
-      stars.push(<span key={i} className={`star ${starClass}`}>★</span>); // Siempre usamos el caracter de estrella completa
-    }
-
-    return <div className="book-rating" data-rating={roundedRating}>{stars}</div>;
-  };
+     toast.success(`"${book.title}" ha sido agregado al carrito!`, { 
+           position: "bottom-center",
+      style:{
+    border: '1px solid #713200',
+    padding: '16px',
+    color: '#713200',
   
+    
+      },
+  iconTheme: {
+    primary: '#713200',
+    secondary: '#FFFAEE',
+  },
+
+
+  
+
+      });
+
+
+
+  };
+
+
   return (
     <div className="book-card">
-      <div className="book-image-container">
-        <img src={book.imageUrl} alt={book.title} className="book-image" />
-      </div>
+   
+      <Link to={`/libros/${book.id}`} className="book-image-link"> {/* Puedes añadir una clase para estilos si necesitas */}
+        <div className="book-image-container">
+          <img 
+          src={`/img/libros/${book.imageUrl}`} 
+          alt={book.title} 
+          className="book-image" />
+        </div>
+      </Link>
+
       <div className="book-info">
-        {renderStars(book.rating)} 
-        <h3 className="book-title">{book.title}</h3>
+        {renderStars(book.rating)}
+    
+         <Link to={`/libros/${book.id}`} className="book-title-link"> 
+            <h3 className="book-title">{book.title}</h3>
+         </Link> 
         <p className="book-author">{book.author}</p>
         <p className="book-price-new">€{book.price}</p> {/* Formato de moneda */}
       </div>
+
       <div className="book-actions">
-        <button href='#' className="button details-button">Detalles </button>
+       
+        <Link to={`/libros/${book.id}`} className="button details-button">
+          Detalles
+        </Link>
+     
         <button onClick={handleAddToCart} className="button add-to-cart-button">
-        <span className="icon"></span> Añadir
+          
+          <span className="icon"></span> Añadir
         </button>
       </div>
     </div>

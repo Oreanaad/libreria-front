@@ -83,8 +83,8 @@
   background-color: var(--primario);
   color: white;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +95,7 @@
 }
 
 .section-title {
-  font-size: 1.5em;
+  font-size: 1.7em;
   color: var(--primario);
   margin: 0;
   margin-right: 15px;
